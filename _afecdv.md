@@ -36,11 +36,9 @@
   - Canine Learning
    - Pavlov
   - Nematode Learning
-   - [*C. elegans*](https://en.wikipedia.org/wiki/Caenorhabditis_elegans#Scientific_community)
+   - *C. elegans*
 
-[see also](https://muzaale.github.io/book/bilowozo.html#parsimony)
-
-```
+```stata
 github
 username.github.io
 https://github.com/username/repo
