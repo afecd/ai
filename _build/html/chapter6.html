@@ -61,8 +61,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapter6';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -334,7 +332,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -350,6 +350,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table1-afecdvi-ado">1. table1_afecdvi.ado</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -361,13 +369,106 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="immediately">
 <h1>immediately<a class="headerlink" href="#immediately" title="Permalink to this heading">#</a></h1>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(3\sigma\)</span></p></li>
-<li><p>build</p></li>
-<li><p>infrastructure</p></li>
-<li><p>efficiency</p></li>
-<li><p>chatGPT-afecdv</p></li>
-</ul>
+<section id="table1-afecdvi-ado">
+<h2>1. table1_afecdvi.ado<a class="headerlink" href="#table1-afecdvi-ado" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="c1">*! inspired by 340.600.71 </span>
+<span class="c1">*! by Vincent Jin &amp; Abi Muzaale</span>
+<span class="c1">*! version 3.02 released on July 5, 2022 </span>
+<span class="c1">*! renamed table1_afecdvi on May 21, 2023</span>
+<span class="c1">*! table1_afecdvi=table1_options+ind_translator</span>
+<span class="k">qui</span> {
+<span class="k">	if</span> <span class="m">0</span> { <span class="c1">//table1 on the dailygrind </span>
+		this .do<span class="k"> file</span> creates table1. its name is pronouned
+		<span class="s">&quot;effective immediately&quot;</span>, but is really a play<span class="k"> on</span>
+		abi fawaz<span class="k"> encode</span> code<span class="k"> decode</span> vincent (with)
+		immediate (effect)
+		table1_afecvi<span class="m">.</span>ado includes<span class="k"> two</span> sequential programs:
+		table1_options<span class="m">.</span>ado <span class="o">&amp;</span> ind_translator<span class="m">.</span>ado
+		was inspired to<span class="k"> do</span> this<span class="k"> by</span> stata&#39;s native<span class="k"> stcox</span><span class="m">.</span>ado 
+	}
+<span class="k">	if</span> <span class="m">1</span> { <span class="c1">//edit file path to suit your machine</span>
+		cls
+<span class="k">		global</span> path1  <span class="o">~/</span>dropbox<span class="o">/</span>2e<span class="m">.</span>πρᾶξις,σ<span class="o">/</span><span class="m">3.</span>acetyl<span class="m">.</span>neurotrans<span class="o">/</span>big<span class="m">.</span>data<span class="o">/</span>
+<span class="k">		global</span> path2 big<span class="m">.</span>data<span class="m">.</span>nchs<span class="o">/</span>nchs<span class="m">.</span>proposal<span class="o">/</span>nchs<span class="m">.</span>04project<span class="o">/</span>
+<span class="k">		global</span> path3 nchs<span class="m">.</span>project<span class="m">.</span>return<span class="o">*/</span>
+<span class="k">		global</span> workdir <span class="s">&quot;</span><span class="vg">$path1$path2$path3</span><span class="s">&quot;</span>
+	}
+<span class="k">	if</span> <span class="m">2</span> {
+<span class="k">		use</span> <span class="s">&quot;</span><span class="vg">${workdir}</span><span class="s">18_nhtable102feb2023.dta&quot;</span>,<span class="k"> clear</span> 
+		<span class="c1">//g string=&quot;string&quot;</span>
+	}
+<span class="k">	if</span> <span class="m">3</span> {
+		<span class="c1">//noi ds, has(type string)</span>
+		<span class="c1">//global string: di &quot;`r(varlist)&#39;&quot;</span>
+<span class="k">		foreach</span> v of<span class="k"> varlist</span> <span class="o">*</span> {
+<span class="k">			replace</span> <span class="nv">`v&#39;</span>=<span class="nf">round</span>(<span class="nv">`v&#39;</span>)
+<span class="k">			levelsof</span> <span class="nv">`v&#39;</span>
+<span class="k">			if</span> <span class="nf">r</span>(r) <span class="o">==</span> <span class="m">2</span> {
+<span class="k">				noi di</span> <span class="s">&quot;binary vars: </span><span class="nv">`v&#39;</span><span class="s">&quot;</span>
+			}
+<span class="k">			else if</span> <span class="nf">inrange</span>(<span class="nf">r</span>(r),<span class="m">3</span>,<span class="m">30</span>) {
+<span class="k">				noi di</span> <span class="s">&quot;categorical vars: </span><span class="nv">`v&#39;</span><span class="s">&quot;</span>
+			} 
+<span class="k">			else</span> {
+<span class="k">				noi di</span> <span class="s">&quot;continuous vars: </span><span class="nv">`v&#39;</span><span class="s">&quot;</span>
+			}
+		}
+	}
+<span class="k">	if</span> <span class="m">4</span> {
+		#delimit ;
+<span class="k">		noi</span> table1_afecdvi, 
+		    excel(<span class="s">&quot;Table1_NHANES&quot;</span>
+		    )
+		    title(
+		    <span class="s">&quot;Table 1. Demographic &amp; health characteristics of NHANES, 1988-2018&quot;</span>
+		    )
+<span class="k">		    by</span>(race2
+		    )
+		    cont(
+		    acr
+		    creat
+		    income 
+		    bmi
+		    logacr 
+		    egfr 
+		    age
+		    sbp
+		    hba1c
+		    glucose 
+		    )
+		    binary(
+			female
+			smk
+			dm
+			htn
+		    )
+		    multi(
+			educ
+		    )
+		    foot(
+			acr
+		    creat
+		    income 
+		    bmi
+		    logacr 
+		    egfr 
+		    age
+		    sbp
+		    hba1c
+		    glucose
+			female
+			smk
+			dm
+			htn
+			educ
+		    )
+		 ;
+		#delimit cr
+	}
+}            
+</pre></div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -419,6 +520,20 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table1-afecdvi-ado">1. table1_afecdvi.ado</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
